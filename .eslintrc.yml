@@ -1,1 +1,4 @@
 extends: uphold
+env:
+  jest: true
+  jasmine: true

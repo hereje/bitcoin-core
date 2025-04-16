@@ -6,7 +6,6 @@
 const _ = require('lodash');
 const Client = require('../src/index');
 const config = require('./config');
-const should = require('should');
 
 /**
  * Test `Requester`.
@@ -17,10 +16,10 @@ describe('Requester', () => {
     try {
       await new Client(_.defaults({ version: '0.12.0' }, config.bitcoin)).getHashesPerSec();
 
-      should.fail();
+      fail();
     } catch (e) {
-      should(e).be.an.instanceOf(Error);
-      should(e.message).equal('Method "gethashespersec" is not supported by version "0.12.0"');
+      expect(e).toBeInstanceOf(Error);
+      expect(e.message).toEqual('Method "gethashespersec" is not supported by version "0.12.0"');
     }
   });
 });

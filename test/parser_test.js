@@ -8,7 +8,6 @@ const Client = require('../src/index');
 const RpcError = require('../src/errors/rpc-error');
 const config = require('./config');
 const nock = require('nock');
-const should = require('should');
 
 /**
  * Test `Parser`.
@@ -31,11 +30,11 @@ describe('Parser', () => {
     try {
       await new Client(config.bitcoin).command('foobar');
 
-      should.fail();
+      fail();
     } catch (e) {
-      should(e).be.an.instanceOf(RpcError);
-      should(e.message).equal('An error occurred while processing the RPC call to bitcoind');
-      should(e.code).equal(-32601);
+      expect(e).toBeInstanceOf(RpcError);
+      expect(e.message).toEqual('An error occurred while processing the RPC call to bitcoind');
+      expect(e.code).toEqual(-32601);
     }
   });
 
@@ -47,11 +46,11 @@ describe('Parser', () => {
     try {
       await new Client(config.bitcoin).command('foobar2');
 
-      should.fail();
+      fail();
     } catch (e) {
-      should(e).be.an.instanceOf(RpcError);
-      should(e.message).equal('Missing `result` on the RPC call result');
-      should(e.code).equal(-32700);
+      expect(e).toBeInstanceOf(RpcError);
+      expect(e.message).toEqual('Missing `result` on the RPC call result');
+      expect(e.code).toEqual(-32700);
     }
   });
 
@@ -59,11 +58,11 @@ describe('Parser', () => {
     try {
       await new Client(_.defaults({ wallet: 'foobar' }, config.bitcoinMultiWallet)).getWalletInfo();
 
-      should.fail();
+      fail();
     } catch (e) {
-      should(e).be.an.instanceOf(RpcError);
-      should(e.message).equal('Requested wallet does not exist or is not loaded');
-      should(e.code).equal(-18);
+      expect(e).toBeInstanceOf(RpcError);
+      expect(e.message).toEqual('Requested wallet does not exist or is not loaded');
+      expect(e.code).toEqual(-18);
     }
   });
 });
