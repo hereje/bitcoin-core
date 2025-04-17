@@ -12,16 +12,7 @@ const RpcError = require('../../src/errors/rpc-error');
 
 describe('RpcError', () => {
   it('should throw a `TypeError` if status code is not numeric', () => {
-    try {
-      /* eslint-disable */
-      new RpcError('foo');
-      /* eslint-enable */
-
-      fail();
-    } catch (e) {
-      expect(e).toBeInstanceOf(TypeError);
-      expect(e.message).toEqual('Non-numeric HTTP code');
-    }
+    expect(() => new RpcError('foo')).toThrow(new TypeError('Non-numeric HTTP code'));
   });
 
   it('should accept extra properties', () => {

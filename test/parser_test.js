@@ -29,8 +29,6 @@ describe('Parser', () => {
 
     try {
       await new Client(config.bitcoin).command('foobar');
-
-      fail();
     } catch (e) {
       expect(e).toBeInstanceOf(RpcError);
       expect(e.message).toEqual('An error occurred while processing the RPC call to bitcoind');
@@ -45,8 +43,6 @@ describe('Parser', () => {
 
     try {
       await new Client(config.bitcoin).command('foobar2');
-
-      fail();
     } catch (e) {
       expect(e).toBeInstanceOf(RpcError);
       expect(e.message).toEqual('Missing `result` on the RPC call result');
@@ -57,8 +53,6 @@ describe('Parser', () => {
   it('should throw an error if the response is not successful but is json-formatted', async () => {
     try {
       await new Client(_.defaults({ wallet: 'foobar' }, config.bitcoinMultiWallet)).getWalletInfo();
-
-      fail();
     } catch (e) {
       expect(e).toBeInstanceOf(RpcError);
       expect(e.message).toEqual('Requested wallet does not exist or is not loaded');

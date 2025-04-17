@@ -62,8 +62,6 @@ describe('Client', () => {
       it('should throw an error if timeout is reached', async () => {
         try {
           await new Client(_.defaults({ timeout: 1 }, config.bitcoin)).listUnspent();
-
-          fail();
         } catch (e) {
           expect(e).toBeInstanceOf(Error);
           expect(e.code).toMatch(/(ETIMEDOUT|ESOCKETTIMEDOUT)/);
@@ -73,8 +71,6 @@ describe('Client', () => {
       it('should throw an error if version is invalid', async () => {
         try {
           await new Client({ version: '0.12' }).getHashesPerSec();
-
-          fail();
         } catch (e) {
           expect(e).toBeInstanceOf(Error);
           expect(e.message).toEqual('Invalid Version "0.12"');
@@ -84,8 +80,6 @@ describe('Client', () => {
       it('should throw an error if a connection cannot be established', async () => {
         try {
           await (new Client(_.defaults({ host: 'http://localhost:9897' }, config.bitcoin))).getDifficulty();
-
-          fail();
         } catch (e) {
           // TODO: why this returns AggregateError instead of Error?
           expect(e.name).toBe('AggregateError');

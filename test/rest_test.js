@@ -55,8 +55,6 @@ describe('REST', () => {
     it('should throw an error if a method contains invalid arguments', async () => {
       try {
         await new Client(config.bitcoin).getTransactionByHash('foobar');
-
-        fail();
       } catch (e) {
         expect(e).toBeInstanceOf(RpcError);
         expect(e.body).toEqual('Invalid hash: foobar\r\n');
@@ -68,8 +66,6 @@ describe('REST', () => {
     it('should throw an error if a method in binary mode contains invalid arguments', async () => {
       try {
         await new Client(config.bitcoin).getTransactionByHash('foobar', { extension: 'bin' });
-
-        fail();
       } catch (e) {
         expect(e).toBeInstanceOf(RpcError);
         expect(e.body).toEqual('Invalid hash: foobar\r\n');
