@@ -24,7 +24,7 @@
   },
   "scripts": {
     "changelog": "github_changelog_generator --project bitcoin-core --user ruimarinho --no-issues --header-label='# Changelog' --future-release=$npm_config_future_release && sed -i '' -e :a -e '$d;N;2,4ba' -e 'P;D' CHANGELOG.md",
-    "cover": "nyc --reporter=html --reporter=text npm test",
+    "cover": "jest --coverage --collectCoverageFrom=src/**/*.js",
     "dependencies": "docker-compose up -d bitcoind bitcoind-username-only",
     "lint": "eslint src test",
     "test": "jest --testTimeout=20000",
@@ -45,19 +45,10 @@
     "eslint-config-uphold": "0.0.1",
     "jest": "^29.7.0",
     "nock": "^9.1.0",
-    "nyc": "^11.3.0",
     "pre-commit": "^1.1.2"
   },
   "engines": {
     "node": ">=7"
-  },
-  "nyc": {
-    "include": [
-      "src/"
-    ],
-    "instrument": false,
-    "report-dir": "./coverage",
-    "sourceMap": false
   },
   "pre-commit": [
     "lint"
